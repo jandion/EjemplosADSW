@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-02-09T10:34:27.693310700Z</date>
+  <millis>1675938867693</millis>
+  <nanos>310700</nanos>
+  <sequence>0</sequence>
+  <logger>MyQueue</logger>
+  <level>WARNING</level>
+  <class>MyQueue</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>Se ha creado una cola</message>
+</record>
+<record>
+  <date>2023-02-09T10:34:27.818021300Z</date>
+  <millis>1675938867818</millis>
+  <nanos>21300</nanos>
+  <sequence>1</sequence>
+  <logger>MyQueue</logger>
+  <level>INFO</level>
+  <class>MyQueue</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>La capacidad de la cola es: 10</message>
+</record>
+</log>
