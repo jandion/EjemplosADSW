@@ -1,22 +1,26 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class PruebasOrdenacion {
 
 	public static void main(String args[]) {
+		List<Integer> nums = new ArrayList<Integer>();
 		List<Carta> baraja = new ArrayList<>();
-		String[] palos = {"Diamantes", "Corazones", "Tréboles", "Picas"};
+		String[] palos = {"Diamantes"};//, "Corazones", "Tréboles", "Picas"};
 		for (int i = 1; i < 14; i++) {
-			for( String palo : palos)
-				baraja.add(new Carta(palo, i));
+			//for( String palo : palos)
+			//	baraja.add(new Carta(palo, i));
+			nums.add(i);
 		}
-		Collections.shuffle(baraja);
+		Collections.shuffle(nums);
 		
-		System.out.println(baraja);
-		Collections.sort(baraja);
-		System.out.println(baraja);
+		System.out.println(nums);
+		mergeSort(nums);
+		System.out.println(nums);
+		
 	}
 
 	public static void burbuja(int[] arr) {
@@ -65,5 +69,66 @@ public class PruebasOrdenacion {
 			}
 		}
 	}
+	
+	public static void mergeSort(List<Integer> nums) {
+		
+		if(nums.size()==1) return;
+		
+		//dividir
+		Division d = dividirEn2(nums);
 
+		List<Integer> izq = d.izq;
+		List<Integer> dcha = d.dcha;
+		
+		//Ordenamos las dos mitades
+		mergeSort(izq);
+		mergeSort(dcha);
+		
+		List<Integer> sol = new ArrayList<>();
+		
+		while(!(izq.isEmpty() || dcha.isEmpty())) {
+//			if( izq.isEmpty()) {
+//				sol.add(dcha.remove(0));
+//			} else if (dcha.isEmpty()) {
+//				sol.add(izq.remove(0));
+//			}
+//			else
+				if (izq.get(0) < dcha.get(0)) {
+				sol.add(izq.remove(0));
+			} else {
+				sol.add(dcha.remove(0));
+			}
+		}
+		sol.addAll(dcha);
+		sol.addAll(izq);
+		
+		nums.clear();
+		nums.addAll(sol);
+		
+	}
+
+	private static Division dividirEn2(List<Integer> nums) {
+		List<Integer> l1 = new ArrayList();
+		List<Integer> l2 = new ArrayList<Integer>();
+		for (int i = 0; i < nums.size()/2; i++) {
+			l1.add(nums.get(i));
+		}
+		for (int i = nums.size()/2; i < nums.size(); i++) {
+			l2.add(nums.get(i));
+		}
+		return new Division(l1, l2);
+	}
+	
+	
+	
+
+}
+
+class Division{
+	List<Integer> izq;
+	List<Integer> dcha;
+	public Division(	List<Integer> izq,	List<Integer> dcha) {
+		this.izq = izq;
+		this.dcha = dcha;
+	}
 }
