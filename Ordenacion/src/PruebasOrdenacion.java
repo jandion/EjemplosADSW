@@ -102,6 +102,8 @@ public class PruebasOrdenacion {
 		sol.addAll(dcha);
 		sol.addAll(izq);
 		
+		nums = sol;
+		
 		nums.clear();
 		nums.addAll(sol);
 		
