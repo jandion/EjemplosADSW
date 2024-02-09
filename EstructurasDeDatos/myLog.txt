@@ -1,0 +1,12 @@
+Feb 08, 2024 12:50:46 PM LectorPeliculas main
+SEVERE: Finalizada la lectura del archivo
+Feb 08, 2024 12:50:46 PM LectorPeliculas main
+WARNING: Creado el diccionario de peliculas
+Feb 08, 2024 12:50:46 PM LectorPeliculas main
+INFO: [Ellen Burstyn,  Jared Leto,  Jennifer Connelly,  Marlon Wayans]
+Feb 08, 2024 12:50:46 PM LectorPeliculas calculaConjuntoActores
+FINEST: Ha tardado: 1
+Feb 08, 2024 12:50:46 PM LectorPeliculas main
+INFO: Actores únicos: 2003
+Feb 08, 2024 12:50:46 PM LectorPeliculas main
+FINE: 2003
