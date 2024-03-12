@@ -6,7 +6,8 @@ public class PruebasOrdenacion {
 	public static void main(String[] args) {
 		int[] nums = GeneradorDatos.arrayEnteros(1000);
 		imprimeArray(nums);
-		Burbuja.sort(nums);
+//		Burbuja.sort(nums);
+		MergeSort.sort(nums);
 		imprimeArray(nums);
 		
 		System.out.println("Está el numero 100: "+ buscaNumero(nums, 100));
