@@ -3,7 +3,7 @@ package es.upm.dit.adsw.arbolbinario;
 import java.util.List;
 
 public class BST {
-	
+
 	private Nodo raiz;
 
 	public static void main(String[] args) {
@@ -45,7 +45,7 @@ public class BST {
 		System.out.println(test.preOrden());
 		System.out.println(test.postOrden());
 	}
-	
+
 	//--------------------------------------------
 	// INSERCIÓN
 	// Se recorre el árbol de forma recursiva hasta
@@ -83,7 +83,7 @@ public class BST {
 			}
 		}
 	}
-	
+
 	//--------------------------------------------
 	// BÚSQUEDA
 	// Se recorre el árbol de forma recursiva hasta
@@ -101,7 +101,7 @@ public class BST {
 		}
 		return buscar(raiz,clave);
 	}
-	
+
 	private boolean buscar(Nodo nodoActual, int clave) {
 		int comparacion = Integer.compare(nodoActual.getClave(), clave);
 		if( comparacion == 0 ) {
@@ -118,7 +118,7 @@ public class BST {
 			return buscar(nodoActual.getHijoDerecho(), clave);
 		}
 	}
-	
+
 	//--------------------------------------------
 	// ELIMINACIÓN
 	// Se recorre el árbol de forma recursiva hasta
@@ -144,32 +144,28 @@ public class BST {
 		}
 		return eliminar(raiz, clave);
 	}
-	
+
 	public ElementoDiccionario eliminar(Nodo nodoActual, int clave) {
 		int comparacion = Integer.compare(nodoActual.getClave(), clave);
-		
+		Nodo hijo;
 		if (comparacion > 0) {
-			if (nodoActual.getHijoIzquierdo() == null) {
-				return null;
-			}
-			if (Integer.compare(nodoActual.getHijoIzquierdo().getClave(), clave) == 0) {
-				ElementoDiccionario resultado = nodoActual.getHijoIzquierdo().getElemento();
-				eliminaNodo(nodoActual, true);
-				return resultado;
-			} else {
-				return eliminar(nodoActual.getHijoIzquierdo(), clave);
-			}
+			hijo = nodoActual.getHijoIzquierdo();
 		} else {
-			if (nodoActual.getHijoDerecho() == null) {
-				return null;
-			}
-			if (Integer.compare(nodoActual.getHijoDerecho().getClave(), clave) == 0) {
-				ElementoDiccionario resultado = nodoActual.getHijoDerecho().getElemento();
-				eliminaNodo(nodoActual, false);
-				return resultado;
-			} else {
-				return eliminar(nodoActual.getHijoDerecho(), clave);
-			}
+			hijo = nodoActual.getHijoDerecho();
+		}
+		return extractedRemove(nodoActual, clave, hijo);
+	}
+
+	private ElementoDiccionario extractedRemove(Nodo nodoActual, int clave, Nodo nodoHijo) {
+		if (nodoHijo == null) {
+			return null;
+		}
+		if (Integer.compare(nodoHijo.getClave(), clave) == 0) {
+			ElementoDiccionario resultado = nodoHijo.getElemento();
+			eliminaNodo(nodoActual, true);
+			return resultado;
+		} else {
+			return eliminar(nodoHijo, clave);
 		}
 	}
 
@@ -249,7 +245,7 @@ public class BST {
 			raiz = nodoSustituto;
 		}
 	}
-	
+
 	//--------------------------------------------
 	// ALTURA DEL ÁRBOL
 	// Cada nodo tiene una altura igual a 1 más la
@@ -259,7 +255,7 @@ public class BST {
 	public int getAltura() {
 		return getAltura(raiz);
 	}
-	
+
 	private int getAltura(Nodo nodoActual) {
 		if (nodoActual == null)
 			return 0;
@@ -302,7 +298,7 @@ public class BST {
 		preOrden(nodoActual.getHijoIzquierdo(), resultado);
 		preOrden(nodoActual.getHijoDerecho(), resultado);
 	}
-	
+
 	public List<ElementoDiccionario> postOrden() {
 		List<ElementoDiccionario> resultado = new java.util.ArrayList<>();
 		postOrden(raiz, resultado);
@@ -336,7 +332,7 @@ public class BST {
 		}
 		return 1 + getNumeroNodos(nodoActual.getHijoIzquierdo()) + getNumeroNodos(nodoActual.getHijoDerecho());
 	}
-	
+
 	//--------------------------------------------
 	// IMPRESIÓN DEL ÁRBOL
 	// Método auxiliar para visualizar el árbol
