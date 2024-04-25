@@ -4,6 +4,7 @@ public class Pedido {
 	public static final String HAMBURGUESA = "🍔";
 	public static final String PATATAS = "🍟";
 	public static final int MAX_ITEMS = 4;
+	
 
 	public int hamburguesas, hamburguesasRecogidas;
 	public int patatas, patatasRecogidas;
@@ -23,15 +24,15 @@ public class Pedido {
 
 	@Override
 	public String toString() {
-		String res = "----------------\n";
+		String res = "";//"----------------\n";
 		res += "Creado hace %3s segs\n".formatted((System.currentTimeMillis()-creacion)/1000);
-		res += "----------------\n";
+		//res += "----------------\n";
 		res += "Hamburguesas: "+ HAMBURGUESA.repeat(hamburguesas) + "\n";
 		res += "Recibidas:    "+ HAMBURGUESA.repeat(hamburguesasRecogidas) + "\n";
-		res += "----------------\n";
+		//res += "----------------\n";
 		res += "Patatas:      "+ PATATAS.repeat(patatas) + "\n";
-		res += "Recibidas:    "+ PATATAS.repeat(patatasRecogidas) + "\n";
-		res += "----------------\n";
+		res += "Recibidas:    "+ PATATAS.repeat(patatasRecogidas);
+		//res += "----------------\n";
 		return res;
 	}
 }
