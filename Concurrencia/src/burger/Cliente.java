@@ -21,7 +21,7 @@ public class Cliente extends Thread {
 			this.pedido = Pedido.pedidoAleatorio();
 			
 			burger.hacerPedido(pedido.hamburguesas, pedido.patatas);
-			burger.recogerPedidoCompleto(pedido);
+			burger.recogerPedido(pedido);
 		}
 	}
 

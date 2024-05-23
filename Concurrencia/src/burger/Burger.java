@@ -2,7 +2,7 @@ package burger;
 
 public class Burger {
 
-	public static final int TAMANO_BANDEJA_SALIDA = 5;
+	public static final int TAMANO_BANDEJA_SALIDA = 10;
 	private int pedidosDeHamburguesas = 0;
 	private int pedidosDePatatas = 0;
 
