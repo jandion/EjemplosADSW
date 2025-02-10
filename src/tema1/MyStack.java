@@ -29,4 +29,8 @@ public class MyStack {
         return stack.get(stack.size() - 1);
     }
 
+    public int getNElements() {
+        return stack.size();
+    }
+
 }
