@@ -1,6 +1,6 @@
 package tema2.cartas;
 
-public class Carta {
+public class Carta implements Comparable<Carta> {
     private Valor valor;
     private Palo palo;
 
@@ -42,18 +42,32 @@ public class Carta {
         }
         switch (palo) {
             case PICAS:
-                rep += "♠️";
+                rep += "♠";
                 break;
             case CORAZONES:
-                rep += "♥️";
+                rep += "♥";
                 break;
             case DIAMANTES:
-                rep += "♦️";
+                rep += "♦";
                 break;
             case TREBOLES:
-                rep += "♣️";
+                rep += "♣";
                 break;
         }
         return rep;
+    }
+
+    @Override
+    public int compareTo(Carta other) {
+        if (this.getPalo() == other.getPalo()) {
+            if (this.getValor() == other.getValor()) {
+                return 0;
+            } else if ( this.getValor().ordinal() > other.getValor().ordinal()) {
+                return 1;
+            }
+            return -1;
+        } else {
+            return this.getPalo().ordinal() - other.getPalo().ordinal();
+        }
     }
 }

@@ -1,5 +1,5 @@
 package tema2.cartas;
 
 public enum Palo {
-    PICAS, CORAZONES, DIAMANTES, TREBOLES
+    DIAMANTES, PICAS, CORAZONES, TREBOLES
 }
