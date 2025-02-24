@@ -36,19 +36,20 @@ public class Baraja {
         }
         System.out.println();
         /*
-        for(int i = 0; i < mano.length; i++) {
-            System.out.println("Colocando la posicion "+ i);
-            Carta minima = mano[i];
-            int posMinima = i;
-            for( int j = i; j < mano.length; j++ ) {
-                Carta pos = mano[j];
-                if (pos.compareTo(minima) < 0) {
+        for(int i = 0; i < mano.length; i++) {                  // n veces
+            System.out.println("Colocando la posicion "+ i);    // O(1)
+            Carta minima = mano[i];                             // O(1)
+            int posMinima = i;                                  // O(1)
+            for( int j = i; j < mano.length; j++ ) {            // n, n-1, n-2, ...
+                Carta pos = mano[j];                            // O(1)
+                if (pos.compareTo(minima) < 0) {                // 2 * O(1)
                     minima = pos;
                     posMinima = j;
+                } else {
                 }
             }
-            swap(mano, i, posMinima);
-            System.out.println("La mano es ");
+            swap(mano, i, posMinima);                           // O(swap)
+            System.out.println("La mano es ");                  // O(1)
             for( Carta carta : mano ) {
                 System.out.print(carta + " ");
             }
