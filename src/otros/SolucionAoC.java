@@ -2,13 +2,14 @@ package otros;
 
 import java.io.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SolucionAoC {
 
     public static void main(String[] args) {
         // Hay que colocar el archivo input.txt con la entrada del problema en la raíz del proyecto
         try {
-            List<String> input = new BufferedReader(new FileReader("input.txt")).lines().toList();
+            List<String> input = new BufferedReader(new FileReader("input.txt")).lines().collect(Collectors.toList());
             System.out.println("La solución de la parte 1 es: " + parte1(input));
             System.out.println("La solución de la parte 2 es: " + parte2(input));
         } catch (FileNotFoundException e) {
