@@ -20,7 +20,7 @@ public class SolucionAoC {
     }
 
     public static long parte1(List<String> input) {
-
+        System.out.println(input);
         return input.size();
     }
 
