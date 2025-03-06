@@ -6,10 +6,10 @@ public class DiccionarioArrayHash implements Diccionario{
     private int nElems;
 
     public static void main(String[] args) {
-        DiccionarioArrayHash diccionario = new DiccionarioArrayHash(10);
+        DiccionarioArrayHash diccionario = new DiccionarioArrayHash(100);
         diccionario.imprimir();
         System.out.println("El diccionario tiene "+ diccionario.size()+ " elementos");
-        diccionario.put("monja", "sjdhfdslk");
+        diccionario.put("monja", "hola");
 
         diccionario.imprimir();
         System.out.println("El diccionario tiene "+ diccionario.size()+ " elementos");
@@ -20,7 +20,8 @@ public class DiccionarioArrayHash implements Diccionario{
         diccionario.imprimir();
         System.out.println("El diccionario tiene "+ diccionario.size()+ " elementos");
 
-        diccionario.put("jamon", "sjdhfdslk");
+        diccionario.put("jamon", "mundo");
+        diccionario.put("nomja", "!");
 
         diccionario.imprimir();
         System.out.println("El diccionario tiene "+ diccionario.size()+ " elementos");
@@ -34,7 +35,7 @@ public class DiccionarioArrayHash implements Diccionario{
 
     @Override
     public void put(String key, String value) {
-        int pos = hash(key);
+        int pos = getPos(key);
         if (keys[pos] == null) {
             keys[pos] = key;
             values[pos] = value;
@@ -50,13 +51,13 @@ public class DiccionarioArrayHash implements Diccionario{
 
     @Override
     public String get(String key) {
-        int pos = hash(key);
+        int pos = getPos(key);
         return values[pos];
     }
 
     @Override
     public String remove(String key) {
-        int pos = hash(key);
+        int pos = getPos(key);
         if (keys[pos] != null) {
             nElems--;
         }
@@ -82,8 +83,39 @@ public class DiccionarioArrayHash implements Diccionario{
         return hash % keys.length;
     }
 
+    public int hash(int i) {
+        return Integer.hashCode(i) % keys.length;
+    }
+
+    public int getPos2(String key){
+        int pos = hash(key);
+        for  (int j = 0; j < keys.length; j++) {
+            int i = (pos + j) % keys.length;
+            if (keys[i] == null) {
+                return i;
+            }
+            if(keys[i].equals(key)) {
+                return i;
+            }
+        }
+        throw new RuntimeException("No he encontrado hueco");
+    }
+    public int getPos(String key){
+        int pos = hash(key);
+        int intentos = 0;
+        while(keys[pos] != null && !keys[pos].equals(key)) {
+            pos = hash(pos);
+            intentos++;
+            if(intentos >= keys.length) {
+                throw new RuntimeException("No he encontrado hueco");
+            }
+        }
+        return pos;
+    }
+
     public void imprimir(){
         for(int i = 0; i < keys.length; i++){
+            System.out.print("Pos" + i + " ");
             System.out.print(keys[i] + " ");
             System.out.println(values[i] + " ");
         }
