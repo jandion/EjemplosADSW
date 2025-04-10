@@ -61,22 +61,22 @@ public class DiccionarioBST implements Diccionario {
 
     private String remove(Nodo nodo, String key) {
         if (nodo== null) return null;
+
+        assert nodo != null;
         if (nodo.key.equals(key)) {
             // he encontrado lo que buscaba
             if (nodo.hijoIzquierdo == null && nodo.hijoDerecho == null) {
                 // lo borro directamente
-
-                // buscamos al padre
-                Nodo padre = root;
-                while(!padre.hijoIzquierdo.equals(nodo) || !padre.hijoDerecho.equals(nodo)) {
-                    if (padre.key.compareTo(key)>0){
-                        padre = padre.hijoIzquierdo;
-                    } else {
-                        padre = padre.hijoDerecho;
-                    }
+                if (nodo==root) {
+                    String temp = root.value;
+                    root=null;
+                    return temp;
                 }
 
-                if(padre.hijoIzquierdo.equals(nodo)){
+                // buscamos al padre
+                Nodo padre = buscarPadre(nodo);
+
+                if(padre.hijoIzquierdo!=null && padre.hijoIzquierdo.key.equals(nodo.key)){
                     padre.hijoIzquierdo = null;
                 } else {
                     padre.hijoDerecho = null;
@@ -97,16 +97,23 @@ public class DiccionarioBST implements Diccionario {
                 return temp;
             } else {
                 // buscamos el mayor nieto por la izquierda
+                String temp  = nodo.value;
                 Nodo actual = nodo.hijoIzquierdo;
                 while( actual.hijoDerecho!=null){
                     actual = actual.hijoDerecho;
                 }
                 // sustuir nodo por actual
-
                 if (actual.hijoIzquierdo == null) {
                     // lo puedo borrar directamente
-                    // TODO: lo mismo que antes
-                    return null;
+                    Nodo padre = buscarPadre(actual);
+                    if(padre.hijoIzquierdo!=null && padre.hijoIzquierdo.key.equals(actual.key)){
+                        padre.hijoIzquierdo = null;
+                    } else {
+                        padre.hijoDerecho = null;
+                    }
+                    nodo.value = actual.value;
+                    nodo.key = actual.key;
+                    return temp;
                 } else {
                     // lo sustituyo por el hijo
                     nodo.key = actual.key;
@@ -115,7 +122,7 @@ public class DiccionarioBST implements Diccionario {
                     actual.value = actual.hijoIzquierdo.value;
                     actual.hijoIzquierdo = null;
                 }
-                return nodo.value;
+                return temp;
             }
         } else {
             if (nodo.key.compareTo(key)>0){
@@ -124,6 +131,23 @@ public class DiccionarioBST implements Diccionario {
                  return remove(nodo.hijoDerecho, key);
             }
         }
+    }
+
+    private Nodo buscarPadre(Nodo nodo) {
+        if (nodo == root) return null;
+        Nodo padre = root;
+        while( !(
+                (padre.hijoDerecho!=null && nodo.key.equals(padre.hijoDerecho.key)) ||
+                (padre.hijoIzquierdo!=null && nodo.key.equals(padre.hijoIzquierdo.key))
+                )){
+            if  (padre.key.compareTo(nodo.key)>0){
+                padre = padre.hijoIzquierdo;
+            }
+            else {
+                padre = padre.hijoDerecho;
+            }
+        }
+        return padre;
     }
 
     @Override
