@@ -69,7 +69,7 @@ public class Grafo {
             aristasPosibles.remove(min);
         }
         if(nodosVisitados.size()!=nodos.size()){
-            throw new Exception("No se pudo crear un arbol recubridor. El grafo no es conexo.")
+            throw new Exception("No se pudo crear un arbol recubridor. El grafo no es conexo.");
         }
         return arbol;
     }
