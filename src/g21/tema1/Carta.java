@@ -51,7 +51,17 @@ public class Carta implements Comparable<Carta> {
 
 	@Override
 	public int compareTo(Carta o) {
-		// TODO Auto-generated method stub
+		if (this.numero != o.numero) {
+			return numero - o.numero;
+		}
+		else {
+			if (palo == Palo.TREBOLES) {
+				if (o.palo == Palo.TREBOLES) {
+					return 0;
+				}
+				else return -1;
+			}
+		}
 		return 0;
 	}
 }
