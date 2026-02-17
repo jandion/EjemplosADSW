@@ -46,7 +46,8 @@ public class Baraja {
 		} else {
 			System.out.println("Alguno mal");
 			//sortBurbuja(manoCartas);
-			sortSeleccion(manoCartas);
+			//sortSeleccion(manoCartas);
+			sortInsercion(manoCartas);
 			System.out.println(manoCartas);
 			System.out.println(estaOrdenada(manoCartas));
 		}
@@ -75,15 +76,15 @@ public class Baraja {
 	}
 
 	public static void sortBurbuja(List<Carta> miLista) {
-		boolean hayCambios = true;
-		while(hayCambios) {
-			hayCambios = false;
-			for(int i = 0; i< miLista.size()-1; i++) {
-				Carta actual = miLista.get(i);
-				Carta siguiente = miLista.get(i+1);
+		boolean hayCambios = true;							// O(1)
+		while(hayCambios) {									// n*{ 1 + n*(5+f)}
+			hayCambios = false;								// O(1)
+			for(int i = 0; i< miLista.size()-1; i++) {		// n*{5 + f}
+				Carta actual = miLista.get(i);				// O(1)
+				Carta siguiente = miLista.get(i+1);			// O(1)
 
-				int res = actual.compareTo(siguiente);
-				if (res > 0) {
+				int res = actual.compareTo(siguiente);		// O(f)
+				if (res > 0) {								// O(3)+O(1)
 					swap(i, i+1, miLista);
 					hayCambios = true;
 				} 
@@ -104,7 +105,7 @@ public class Baraja {
 			swap(i, posMinima, miLista);	
 		}
 	}
-	public static void sortInsertion(List<Carta> miLista) {
+	public static void sortInsercion(List<Carta> miLista) {
 		for (int i = 1; i < miLista.size(); i++) {
 			insert(miLista, i, miLista.get(i));
 		}
@@ -112,9 +113,13 @@ public class Baraja {
 
 	private static void insert(List<Carta> miLista, int i, Carta carta) {
 		int j = i;
-		while(j>0 &&carta.compareTo(miLista.get(j-1))<0) {
+		while(j > 0 && carta.compareTo(miLista.get(j-1))<0) {
 			j--;
 		}
+		for (int k = i; k > j; k--) {
+			miLista.set(k, miLista.get(k-1));
+		}
+		miLista.set(j, carta);
 		
 	}
 }
