@@ -18,7 +18,7 @@ public class Baraja {
 		manoCartas.add(unoDiamantes);
 		manoCartas.add(dosPicas);
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 10; i++) {
 			int valor = (int)(Math.random()*12+1);
 			Palo palo;
 			double rand = Math.random();
@@ -47,7 +47,9 @@ public class Baraja {
 			System.out.println("Alguno mal");
 			//sortBurbuja(manoCartas);
 			//sortSeleccion(manoCartas);
-			sortInsercion(manoCartas);
+			//sortInsercion(manoCartas);
+			//manoCartas = mergeSort(manoCartas);
+			quickSort2(manoCartas);
 			System.out.println(manoCartas);
 			System.out.println(estaOrdenada(manoCartas));
 		}
@@ -91,7 +93,7 @@ public class Baraja {
 			}
 		}
 	}
-	
+
 	public static void sortSeleccion(List<Carta> miLista) {
 		for (int i = 0; i < miLista.size(); i++) {
 			Carta minima = miLista.get(i);
@@ -120,6 +122,86 @@ public class Baraja {
 			miLista.set(k, miLista.get(k-1));
 		}
 		miLista.set(j, carta);
-		
+
 	}
+
+	public static List<Carta> mergeSort(List<Carta> miLista){
+
+		System.out.println("Inicio:" + miLista);
+		if (miLista.size() == 1) {
+			return miLista;
+		}
+
+		// Dividir
+		List<Carta> izq = new ArrayList<Carta>();
+		List<Carta> dch = new ArrayList<Carta>();
+		for ( int i = 0; i < miLista.size() / 2 ; i++ ) {
+			izq.add(miLista.get(i));
+		}
+		for ( int i = miLista.size() / 2; i < miLista.size() ; i++ ) {
+			dch.add(miLista.get(i));
+		}
+		System.out.println("Antes: izq = "+izq+" dch= "+dch);
+		izq = mergeSort(izq);
+		dch = mergeSort(dch);
+		System.out.println("Despues: izq = "+izq+" dch= "+dch);
+
+		// Unir
+
+		List<Carta> res = new ArrayList<Carta>();
+
+		while(dch.size()>0 && izq.size()>0) { // las dos listas tengan elementos
+			if ( izq.get(0).compareTo(dch.get(0)) <= 0 ) {
+				// uso lo que hay en izq
+				res.add(izq.remove(0));
+			} else {
+				// uso lo que hay en dch
+				res.add(dch.remove(0));
+			}
+		}
+
+		res.addAll(izq);
+		while(dch.size()>0) {
+			res.add(dch.remove(0));
+		}
+
+		System.out.println("Final:" + res);
+		return res;
+	}
+
+	public static void quickSort( List<Carta> miLista ) {
+		if (miLista.size() <= 1) {
+			return;
+		}
+		System.out.println("Inicio:" + miLista);
+		// Elegimos el pivot
+		int mitad = miLista.size()/2;
+		Carta pivot = miLista.get(mitad);
+		System.out.println("Pivot:"+ pivot);
+		List<Carta> izq = new ArrayList<Carta>();
+		List<Carta> dch = new ArrayList<Carta>();
+
+		for (int i = 0; i < miLista.size(); i++) {
+			if( i == mitad) continue;
+			if( miLista.get(i).compareTo(pivot) <= 0 ) {
+				izq.add(miLista.get(i));
+			} else {
+				dch.add(miLista.get(i));
+			}
+		}
+		quickSort(izq);
+		quickSort(dch);
+
+		miLista.clear();
+		miLista.addAll(izq);
+		miLista.add(pivot);
+		miLista.addAll(dch);
+
+		System.out.println("Final:" + miLista);
+	}
+
+	private static void quickSort2(List<Carta> data) {
+		//sort(data, 0, data.size());
+	}
+	
 }
