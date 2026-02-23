@@ -201,7 +201,24 @@ public class Baraja {
 	}
 
 	private static void quickSort2(List<Carta> data) {
-		//sort(data, 0, data.size());
+		sort(data, 0, data.size());
+	}
+	
+	private static void sort(List<Carta> data, int inicio, int fin) {
+		if (inicio >= fin) {
+			return; // un solo elemento
+		}
+		Carta pivot = data.get(inicio);
+		int ultimoMenor = inicio;
+		for(int j = inicio+1; j < fin; j++) {
+			if (pivot.compareTo(data.get(j)) > 0) {
+				ultimoMenor++;
+				swap(ultimoMenor, j, data);
+			}
+		}
+		swap(inicio, ultimoMenor, data);
+		sort(data, inicio, ultimoMenor);
+		sort(data, ultimoMenor+1, fin);
 	}
 	
 }

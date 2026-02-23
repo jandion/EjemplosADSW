@@ -55,7 +55,7 @@ public class Carta implements Comparable<Carta>{
 				return -1;
 		}
 		if(this.palo ==Palo.CORAZONES) {
-			if (otra.palo == Palo.DIAMANTES) return 0;
+			if (otra.palo == Palo.CORAZONES) return 0;
 			return -1;
 
 		}

@@ -1,6 +1,7 @@
 package g21.tema1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Baraja {
@@ -52,6 +53,8 @@ public class Baraja {
 			burbuja(baraja);
 			System.out.println("Ordenado!");
 		}
+		
+		
 	}
 
 	private static void swap(int pos1, int pos2, List<Carta> myList) {
@@ -147,7 +150,32 @@ public class Baraja {
 	}
 
 
-
+	public static void quickSort(List<Carta> myList) {
+		quickSort(myList, 0, myList.size());
+	}
+	
+	private static void quickSort(List<Carta> myList, int inicio, int fin) {
+		// cond parada
+		if (inicio>=fin) {
+			return;
+		}
+		
+		// elegimos pivot
+		Carta pivot = myList.get(inicio);
+		int numElemMenores = 0;
+		for( int i = inicio + 1; i < fin; i++) {
+			// si el elemento es mayor no hacemos nada
+			if (myList.get(i).compareTo(pivot) < 0) { // si el elemento es menor
+				numElemMenores++;
+				swap(numElemMenores+inicio, i, myList);
+			}
+		}
+		swap(inicio, numElemMenores+inicio, myList);
+		
+		quickSort(myList, inicio, numElemMenores+inicio);
+		quickSort(myList, numElemMenores+inicio+1, fin);
+		
+	}
 
 
 
