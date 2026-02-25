@@ -203,22 +203,37 @@ public class Baraja {
 	private static void quickSort2(List<Carta> data) {
 		sort(data, 0, data.size());
 	}
-	
+
 	private static void sort(List<Carta> data, int inicio, int fin) {
-		if (inicio >= fin) {
-			return; // un solo elemento
+		// cond parada
+		if( inicio >= fin ) {
+			return;
 		}
+		
+		// elegir pivot
+		System.out.println("datos: " + data);
+		System.out.println(inicio + " " + fin);
 		Carta pivot = data.get(inicio);
-		int ultimoMenor = inicio;
-		for(int j = inicio+1; j < fin; j++) {
-			if (pivot.compareTo(data.get(j)) > 0) {
-				ultimoMenor++;
-				swap(ultimoMenor, j, data);
+		System.out.println("pivot: "+ pivot);
+		int numMenores = 0;
+		
+		// recolocar respecto al pivot
+		for (int pos = inicio + 1; pos < fin; pos++) {
+			if (pivot.compareTo(data.get(pos)) > 0 ) { 
+				// lo que hay en pos, es menor o igual que pivot
+				numMenores++;
+				swap(pos, numMenores+inicio, data);
+			} else {
+				// pos mayor que pivot
 			}
 		}
-		swap(inicio, ultimoMenor, data);
-		sort(data, inicio, ultimoMenor);
-		sort(data, ultimoMenor+1, fin);
+		swap(inicio, numMenores+inicio, data);
+		
+		System.out.println("Recolocado: "+ data);
+		// ordenar la parte izq y dcha
+		sort(data, inicio, numMenores+inicio);
+		sort(data, numMenores+inicio+1, fin);
+		
 	}
 	
 }
