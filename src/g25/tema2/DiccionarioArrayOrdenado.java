@@ -12,10 +12,10 @@ public class DiccionarioArrayOrdenado implements Diccionario{
 	}
 
 	private int busquedaBinariaRecursiva(String claveBuscada) {
-		return busquedaBinariaRecursivaInterna(claveBuscada, 0, numElementos);
+		return busquedaBinariaRecursivaInterna(claveBuscada, 0, numElementos-1);
 	}
 	private int busquedaBinariaRecursivaInterna(String claveBuscada, int inicio, int fin) {
-		if(inicio ==  fin) {
+		if(inicio >=  fin) {
 			if(elementos[inicio]!=null &&elementos[inicio].clave.equals(claveBuscada)) {
 				return inicio;
 			}
@@ -30,7 +30,7 @@ public class DiccionarioArrayOrdenado implements Diccionario{
 		} else if ( comparacion < 0) {
 			return busquedaBinariaRecursivaInterna(claveBuscada, puntoMedio+1, fin);
 		} else {
-			return busquedaBinariaRecursivaInterna(claveBuscada, 0, puntoMedio);
+			return busquedaBinariaRecursivaInterna(claveBuscada, inicio, puntoMedio);
 		}
 		
 	}
@@ -41,6 +41,10 @@ public class DiccionarioArrayOrdenado implements Diccionario{
 		int pos = busquedaBinariaRecursiva(clave);
 		if (pos<0) {
 			// la clave no estaba
+			if(numElementos+1==elementos.length) {
+				System.err.println("Se intenta añadir un elmento y ya está lleno el array");
+				return;
+			}
 			
 			int k = -(pos+1);
 			for( int i = numElementos; i>k; i--) {

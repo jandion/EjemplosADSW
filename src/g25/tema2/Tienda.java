@@ -11,9 +11,9 @@ public class Tienda {
 	public static void main(String[] args) {
 
 		// Clientes
-		Diccionario clientes = new DiccionarioArrayOrdenado();
+		Diccionario clientes = new DiccionarioHash();
 		
-		for(int i = 0; i < 10000000; i++) {
+		for(int i = 0; i < 30; i++) {
 			String clave = String.format("%04d", i);
 			List<String> valor = generarListaSuper();// carrito
 			clientes.put(clave, valor);
@@ -21,6 +21,8 @@ public class Tienda {
 		
 		// buscamos el 42
 		String claveBuscada = "0042";
+		
+		
 		boolean encontrado = clientes.contains(claveBuscada);
 		
 		// actualizar
