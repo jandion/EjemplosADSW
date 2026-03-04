@@ -24,9 +24,9 @@ public class Tienda {
 
 		ClaveValor<String, List<String>> cliente = new ClaveValor<>(id, carrito);
 
-		clientes = new DiccionarioConLista();
+		clientes = new DiccionarioArrayOrdenado();
 
-		for( int i = 1; i< 100; i++) {
+		for( int i = 1; i< 80; i++) {
 			String idCliente = "00" + i;
 			// usar el format
 			List<String> carritoCliente = getCartItems();
