@@ -26,7 +26,8 @@ public class DiccionarioHash implements Diccionario {
 				return pos;
 			}
 			
-			pos = (pos+1)%elementos.length;
+			//pos = (pos+1)%elementos.length;
+			pos = Integer.hashCode(pos)%elementos.length;
 			if (pos == pos0) {
 				System.out.println("Estamos en un bucle infinito");
 				return -1;
