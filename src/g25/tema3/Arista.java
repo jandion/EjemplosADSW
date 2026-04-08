@@ -10,4 +10,11 @@ public class Arista {
 		this.destino = destino;
 		this.peso = peso;
 	}
+	
+	public Nodo getOtro(Nodo n) {
+		if (n.equals(origen))
+			return destino;
+		else
+			return origen;
+	}
 }

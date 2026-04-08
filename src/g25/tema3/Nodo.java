@@ -14,10 +14,19 @@ public class Nodo {
 	}
 
 	public boolean esVecinoDe(Nodo otro) {
-		return false; // TODO
+		for(Arista ar : vecinos) {
+			if (ar.getOtro(this).equals(otro)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public boolean conectarA(Nodo otro) {
-		return false; // TODO
+		if(esVecinoDe(otro)) return false;
+		Arista ar = new Arista(this, otro, 1);
+		vecinos.add(ar);
+		otro.vecinos.add(ar);
+		return true; 
 	}
 }
