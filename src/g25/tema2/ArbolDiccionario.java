@@ -34,8 +34,18 @@ public class ArbolDiccionario implements Diccionario{
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size(raiz);
+	}
+	
+	private int size(Nodo nodo) {
+		if (nodo == null) {
+			return 0;
+		}
+		int res = 1;
+		res += size(nodo.hijoIzq);
+		res += size(nodo.hijoDch);
+		
+		return res;
 	}
 
 	@Override
@@ -74,6 +84,19 @@ public class ArbolDiccionario implements Diccionario{
 				return contains(nodo.hijoDch, clave);
 				
 		}
+	}
+	
+	public void imprimeOrdenado() {
+		System.out.println(recorreEnOrden(raiz));
+	}
+
+	private String recorreEnOrden(Nodo nodo) {
+		if (nodo == null) return "";
+		String res = "";
+		res += recorreEnOrden(nodo.hijoIzq) +" ";
+		res += nodo.clave + " ";
+		res += recorreEnOrden(nodo.hijoDch) +" ";
+		return res;
 	}
 	
 	
