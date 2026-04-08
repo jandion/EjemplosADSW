@@ -66,12 +66,28 @@ public class Grafo {
 		return false; // TODO
 	}
 	
+	public List<Nodo> getCaminoEntre(Nodo a, Nodo b){
+		return null; // TODO
+	}
+	
+	public double getDistanciaEntre(Nodo a, Nodo b){
+		return 0; // TODO
+	}
+	
 	public boolean hayCiclos() {
 		return false; // TODO
 	}
 	
 	public void anadirNodo(Nodo n) {
 		nodos.add(n);
+	}
+
+	public List<Arista> getArbolRecubridor() {
+		return null; // TODO
+	}
+	
+	public List<Arista> getArbolRecubridorMinimo() {
+		return null; // TODO
 	}
 	
 	
