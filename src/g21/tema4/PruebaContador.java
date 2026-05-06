@@ -4,8 +4,11 @@ public class PruebaContador {
 
 
 	public static void main(String[] args) {
-		Contador c1 = new Contador("Cont1");
-		Contador c2 = new Contador("Cont2");
+		
+		MonitorContador monitor = new MonitorContador();
+		
+		Contador c1 = new Contador("Cont1", monitor);
+		Contador c2 = new Contador("Cont2", monitor);
 
 		Reloj reloj = new Reloj();
 

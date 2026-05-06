@@ -2,8 +2,9 @@ package g25.tema4;
 
 public class PruebaContador {
 	public static void main(String[] args) {
-		Contador cont1 = new Contador("Contador 1");
-		Contador cont2 = new Contador("Contador 2");
+		MonitorContador monitor = new MonitorContador();
+		Contador cont1 = new Contador("Contador 1", monitor);
+		Contador cont2 = new Contador("Contador 2", monitor);
 		Reloj reloj = new Reloj();
 		
 		//cont1.run(); nunca llamamos a run directamente
@@ -20,7 +21,7 @@ public class PruebaContador {
 		}
 		
 		System.out.println("Hemos acabado de contar");
-		System.out.println("El resultado final es "+Contador.c);
+		System.out.println("El resultado final es "+monitor.getContador());
 		System.exit(0);
 	}
 }
